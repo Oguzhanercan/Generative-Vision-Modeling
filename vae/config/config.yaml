@@ -1,0 +1,47 @@
+# config/config.yaml
+training:
+  epochs: 200
+  batch_size: 64
+  learning_rate: 1e-4
+  device: "cuda"
+  log_interval: 100  # Now in steps (batches), not epochs
+  checkpoint_dir: "./checkpoints"
+  output_dir: "./outputs"
+  limit_samples: 1000
+  n_best: 3  # Save top 3 models by validation loss
+  limit_samples: 110000  # Limit dataset size (optional, set to -1 for no limit)
+
+data:
+  dataset_path: "/home/oguzhan/Downloads/images/"
+  image_size: 64
+  val_split: 0.1  # Fraction of dataset for validation
+
+model:
+  input_dim: 3
+  latent_dim: 512
+  hidden_dims: [64, 128, 256, 512]
+  constant_variance: true
+  use_vq: true  # Enable Vector Quantization (VQ-VAE)
+  vq_num_embeddings: 512  # Number of codebook vectors
+  vq_embedding_dim: 64  # Dimension of each codebook vector
+  vq_beta: 0.25  # Commitment loss weight
+
+loss:
+  reconstruction_loss: "l1"
+  kl_annealing_epochs: 50
+  beta_kl: 0.1
+  beta_recon: 1.0
+  use_perceptual: true
+  perceptual_weight: 1.0
+  use_lpips: true
+  lpips_weight: 1.0
+  use_ssim: true
+  ssim_weight: 1.0
+  use_gradnorm: true
+  use_pooled_mse: true
+  use_lowpass: true
+
+gan:
+  enabled: false
+  discriminator_lr: 2e-4
+  gan_weight: 1.0
