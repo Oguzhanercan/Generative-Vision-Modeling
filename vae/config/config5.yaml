@@ -60,12 +60,12 @@ training:
 
 data:
   dataset_path: "/home/oguzhan/Downloads/images/"
-  image_size: 64
+  image_size: 256
   val_split: 0.1  # Fraction of dataset for validation
   data_channel: 3 # RGB -> 3 ; grayscale -> 1 etc.
 
 model:
-  model_type: "vae"  # Options: "vae" (Variational Autoencoder) or "ae" (Autoencoder)
+  model_type: "ae"  # Options: "vae" (Variational Autoencoder) or "ae" (Autoencoder)
   input_dim: 64
   hidden_dims: [64, 128, 256] 
   block_configs:
@@ -73,7 +73,7 @@ model:
     - {type: "attention"}
     - {type: "resnet"}
   downsample_positions: [0, 1]  # 2 downsamples: 64 → 32 → 16
-  input_size: 64
+  input_size: 256
   latent_dim: 128
   vq_embedding_dim: 128
   vq_num_embeddings: 512
@@ -102,8 +102,8 @@ gan:
 
 optimize_memory_usage:
   # Enable gradient checkpointing to trade computation for memory by recomputing intermediate activations.
-  use_gradient_checkpointing: false
+  use_gradient_checkpointing: true
   # Enable mixed precision training to reduce memory usage by using float16 for most computations.
-  use_mixed_precision: false #Do not enable this param, a bug discovered, it will be fixed in the future releases.
+  use_mixed_precision: true
   # Process perceptual losses in smaller batches to reduce peak memory usage.
   perceptual_loss_batch_size: 0  # Set to 0 to disable; otherwise, specify batch size (e.g., 4)
