@@ -1,0 +1,22 @@
+training:
+  epochs: 200
+  batch_size: 64
+  learning_rate: 1e-4
+  device: "cuda"
+  log_interval: 100  # logging steps
+  output_dir: "./outputs"
+  limit_samples: 100000  # number of samples used if dataset is too large
+  n_best: 3  # Save top 3 models by validation loss
+  T_max: 20  # Number of epochs for cosine annealing
+  vis_interval: 5  # Visualization interval
+data:
+  dataset_path: "/home/oguzhan/Downloads/face_dataset/celeba/"
+  image_size: 64
+  val_split: 0.1  # Fraction of dataset for validation
+  data_channel: 3  # RGB -> 3 ; grayscale -> 1 etc.
+ddpm:
+  steps: 1000
+  beta_start: 1e-4
+  beta_end: 0.02
+  beta_schedule: "linear"  # linear, cosine, quadratic
+  model_type: "ddpm"  # ddpm, ddim

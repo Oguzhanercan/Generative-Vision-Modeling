@@ -1,3 +1,4 @@
 vae/outputs/
 __pycache__/
 vae/jn_outs/
+ddpm/outputs/
